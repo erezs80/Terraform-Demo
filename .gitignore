@@ -1,0 +1,5 @@
+/aks/
+/.terraform/
+*.tfstate
+*.tfstate.backup
+secret.yml
