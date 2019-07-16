@@ -19,15 +19,10 @@ resource "azurerm_subnet" "Front" {
   name                 = "${var.RGName}-subnet-Front"
   resource_group_name  = "${azurerm_resource_group.RG.name}"
   virtual_network_name = "${azurerm_virtual_network.network.name}"
-  address_prefix       = "${var.private_subnets}"
+  address_prefix       = "${var.front_subnet}"
 }
 
-resource "azurerm_subnet" "Back" {
-  name                 = "${var.RGName}-subnet-Back"
-  resource_group_name  = "${azurerm_resource_group.RG.name}"
-  virtual_network_name = "${azurerm_virtual_network.network.name}"
-  address_prefix       = "${var.public_subnets}"
-}
+
 
 resource "azurerm_network_security_group" "NSG" {
   location = "${var.location}"
@@ -56,11 +51,57 @@ resource "azurerm_subnet_network_security_group_association" "Front" {
   network_security_group_id = "${azurerm_network_security_group.NSG.id}"
 }
 
-resource "azurerm_subnet_network_security_group_association" "Back" {
-  subnet_id = "${azurerm_subnet.Back.id}"
-  network_security_group_id = "${azurerm_network_security_group.NSG.id}"
+
+resource "azurerm_network_interface" "main" {
+  count = "${var.vm_count}"
+  name                = "${var.vmName}-nic-${count.index}"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.RG.name}"
+
+  ip_configuration {
+    name                          = "ipconfiguration1"
+    subnet_id                     = "${azurerm_subnet.Front.id}"
+    private_ip_address_allocation = "Dynamic"
+  }
 }
 
+resource "azurerm_virtual_machine" "main" {
+  count = "${var.vm_count}"
+  name                  = "${var.vmName}-vm-${count.index}"
+  location              = "${var.location}"
+  resource_group_name   = "${azurerm_resource_group.RG.name}"
+  network_interface_ids = ["${element(azurerm_network_interface.main.*.id, count.index)}"]
+  vm_size               = "${var.vm_size}"
+
+  # Uncomment this line to delete the OS disk automatically when deleting the VM
+  delete_os_disk_on_termination = true
+
+
+
+  storage_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "16.04-LTS"
+    version   = "latest"
+  }
+  storage_os_disk {
+    name              = "${var.vmName}-os-disk-${count.index}"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
+  }
+  os_profile {
+    computer_name  = "${var.vmName}"
+    admin_username = "testadmin"
+    admin_password = "Password1234!"
+  }
+  os_profile_linux_config {
+    disable_password_authentication = false
+  }
+  tags = {
+    environment = "Demo"
+  }
+}
 
 
 

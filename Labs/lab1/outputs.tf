@@ -22,17 +22,13 @@ output "Front_subnet_name" {
   value = "${azurerm_subnet.Front.name}"
 }
 
+output "Front_subnet_id" {
+  value = "${azurerm_subnet.Front.id}"
+}
+
 output "Front_subnet_cidr" {
   value = "${azurerm_subnet.Front.address_prefix}"
 }
-output "Back_subnet_name" {
-  value = "${azurerm_subnet.Back.name}"
-}
-
-output "Back_subnet_cidr" {
-  value = "${azurerm_subnet.Back.address_prefix}"
-}
-
 
 output "NSG_name" {
   value = "${azurerm_network_security_group.NSG.name}"
@@ -40,4 +36,8 @@ output "NSG_name" {
 
 output "NSG_id" {
   value = "${azurerm_network_security_group.NSG.id}"
+}
+
+output "VM_id" {
+  value = "${azurerm_virtual_machine.main.*.id}"
 }
