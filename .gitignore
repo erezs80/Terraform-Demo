@@ -5,5 +5,3 @@
 secret.yml
 /Demo/.terraform/
 /Labs/lab1/.terraform/
-/Labs/lab2/.terraform/
-*.gitignore
