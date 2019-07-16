@@ -1,6 +1,6 @@
-RGName= "ereztest-RG"
+RGName= "terrademo-RG"
 location= "west europe"
-vNetName= "ereztest-vnet"
+vNetName= "terrademo-vnet"
 address_space= "10.0.0.0/16"
 private_subnets= "10.0.1.0/24"
 public_subnets= "10.0.2.0/24"
