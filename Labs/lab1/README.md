@@ -37,6 +37,6 @@ Lab 1 instructions:
   c. run terraform apply
   d. check in the azure portal that only 1 vm had been added to your deployment
 
-11. Clean the resources we creates during the lab :
+11. Clean the resources we created during the lab :
   terraform destory
   enter "yes" to continue
