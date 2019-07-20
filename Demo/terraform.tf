@@ -48,7 +48,7 @@ resource "azurerm_network_security_rule" "inbound_http_cidr" {
   priority = 100
   protocol = "TCP"
   #source_address_prefix = "${element(var.inbound_http_cidr, count.index)}"
-  source_address_prefixes = ["${var.inbound_http_cidr}"]
+  source_address_prefixes = "${var.inbound_http_cidr}"
 }
 
 resource "azurerm_subnet_network_security_group_association" "Front" {
