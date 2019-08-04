@@ -1,7 +1,7 @@
 Lab 1 instructions:
 
 1. Install Terraform:
-  follwo this link to install terraform on your workstaion : https://learn.hashicorp.com/terraform/getting-started/install.html
+  follow this link to install terraform on your workstation : https://learn.hashicorp.com/terraform/getting-started/install.html
   
 2. Create in your Azure subscription service principal :
   follow this link to create service principal in your subscription (this service principal later on will grant terraform to make changes     on your Azure subscription on your behalf: 
@@ -25,7 +25,7 @@ Lab 1 instructions:
 7. Now try to run terraform plan command to see what terraform going to change :
   terraform plan
   
-8. After the plan command, you are readt to apply the changes!!! run terraform apply command :
+8. After the plan command, you are ready to apply the changes!!! run terraform apply command :
   terraform apply
   enter "yes" to continue
 
@@ -38,5 +38,5 @@ Lab 1 instructions:
   d. check in the azure portal that only 1 vm had been added to your deployment
 
 11. Clean the resources we created during the lab :
-  terraform destory
+  terraform destroy
   enter "yes" to continue
