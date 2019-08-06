@@ -7,7 +7,7 @@ Lab 1 instructions:
   follow this link to create service principal in your subscription (this service principal later on will grant terraform to make changes     on your Azure subscription on your behalf: 
   https://docs.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-2.4.0#create-a-service-principal
   
-3. Add the clirnt_id, client_secret, subscription_id, tenant_id you got from the output of the previous stage to your environment              variables:
+3. Add the client_id, client_secret, subscription_id, tenant_id you got from the output of the previous stage to your environment              variables:
     ARM_CLIENT_ID 
     ARM_CLIENT_SECRET
     ARM_SUBSCRIPTION_ID
